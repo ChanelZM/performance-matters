@@ -1,7 +1,7 @@
 # Audit
 ## Images
-![before using picture and webp](https://github.com/ChanelZM/performance-matters/blob/master/auditimg/beforepicture.png)
-![before using picture and webp](https://github.com/ChanelZM/performance-matters/blob/master/auditimg/afterpicture.png)
+![before using picture and webp](https://github.com/ChanelZM/performance-matters/blob/feature/images/auditimg/beforepicture.png)
+![before using picture and webp](https://github.com/ChanelZM/performance-matters/blob/feature/images/auditimg/afterpicture.png)
 
 ### What I did
 First I compressed the images. Then I checked my website with [GT Metrix](https://gtmetrix.com/) and it told me that I could resize my images to 234x176. Then I changed the HTML from:
