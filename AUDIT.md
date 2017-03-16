@@ -38,7 +38,7 @@ Bootstrap doesn't even use CDN but loads the bootstrap.css from their own folder
 ```
 
 ###### Loading time
-![before changing the css](https://github.com/ChanelZM/performance-matters/blob/feature/images/auditimg/afterpicture.png)
+![before changing the css](https://github.com/ChanelZM/performance-matters/blob/feature/criticalcss/auditimg/afterpicture.png)
 
 ### What I did
 First I changed the link to bootstrap.css to an external bootstrap.css on CDN. Then I merged fonts.css and docs.css. The last stap was minifying the css. I did that with [CSS Compressor](http://csscompressor.com/).
@@ -50,4 +50,4 @@ First I changed the link to bootstrap.css to an external bootstrap.css on CDN. T
 ```
 
 ###### Loading time
-![After modifying the CSS](https://github.com/ChanelZM/performance-matters/blob/feature/images/auditimg/aftercss.png)
+![After modifying the CSS](https://github.com/ChanelZM/performance-matters/blob/feature/criticalcss/auditimg/aftercss.png)
