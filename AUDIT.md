@@ -41,7 +41,7 @@ Bootstrap doesn't even use CDN but loads the bootstrap.css from their own folder
 ![before changing the css](https://github.com/ChanelZM/performance-matters/blob/feature/js/auditimg/afterpicture.png)
 
 ### What I did
-First I changed the link to bootstrap.css to an external bootstrap.css on CDN. Then I merged fonts.css and docs.css. The last stap was minifying the css. I did that with [CSS Compressor](http://csscompressor.com/).
+First I changed the link to bootstrap.css to an external bootstrap.css on CDN. Then I merged fonts.css and docs.css. Then I had to minify the css. I did that with [CSS Compressor](http://csscompressor.com/).
 
 ###### The code
 ```html
@@ -82,3 +82,6 @@ crossorigin="anonymous" defer></script>
 
 ###### Loading time
 ![Before modifying the JS](https://github.com/ChanelZM/performance-matters/blob/feature/js/auditimg/afterjs.png)
+
+## HTML
+### How it was
