@@ -1,7 +1,7 @@
 # Audit
 ## Images
 ### How it was
-Bootstrap uses just one image element which is pretty big, both size and weight. This ofcourse results in long loads when your internet connection isn't the best. Plus, big images are not needed on smaller screens so resizing them for smaller screens is ideal.
+Bootstrap uses one image element which is pretty big, both size and weight. This of course results in long loads when your internet connection isn't the best. Plus, big images are not needed on smaller screens so resizing them for smaller screens is better practice.
 
 ###### The code
 ```html
@@ -12,7 +12,7 @@ Bootstrap uses just one image element which is pretty big, both size and weight.
 ![before using picture and webp](https://github.com/ChanelZM/performance-matters/blob/feature/js/auditimg/beforepicture.png)
 
 ### What I did
-First I compressed the images using [Tiny JPG](https://tinyjpg.com/). Then I checked my website with [GT Metrix](https://gtmetrix.com/) and it told me that I could resize my images to 234x176. I placed the image inside a `<picture>` element and added a `<source srcet="">`. I also converted the images to WEBP and placed them inside the `<picture>` element.
+To tackle this problem, I first compressed the images using [Tiny JPG](https://tinyjpg.com/). The pictures became significantly smaller. The second step I took was analyzing my website with [GT Metrix](https://gtmetrix.com/) (Credits to [Elton Goncalves Gomes](https://github.com/eltongonc)). This website told me that resizing the images would make the website faster. I copied and changed the images from 800px wide to 234px wide. So then I had two sizes which I placed in a `<picture>` element and added a `<source srcet="">`. I also converted the images to WEBP and placed them inside the `<picture>` element.
 
 ###### The code
 ```html
@@ -30,7 +30,7 @@ First I compressed the images using [Tiny JPG](https://tinyjpg.com/). Then I che
 
 ## CSS
 ### How it was
-Bootstrap doesn't even use CDN but loads the bootstrap.css from their own folder. Plus their css isn't minified.
+Bootstrap loads all the CSS from the folder but doesn't use a CDN for the job. The CSS also isn't minified so I takes quite a long time to load.
 
 ###### The code
 ```html
@@ -41,7 +41,7 @@ Bootstrap doesn't even use CDN but loads the bootstrap.css from their own folder
 ![before changing the css](https://github.com/ChanelZM/performance-matters/blob/feature/js/auditimg/afterpicture.png)
 
 ### What I did
-First I changed the link to bootstrap.css to an external bootstrap.css on CDN. Then I merged fonts.css and docs.css. Then I had to minify the css. I did that with [CSS Compressor](http://csscompressor.com/).
+First I changed the link to bootstrap.css into an external bootstrap.css on a CDN (Source why I did this: [Elton Goncalves Gomes](https://github.com/eltongonc)). Then I merged fonts.css and docs.css so the website doesn't do a lot of HTTP requests. And lastly I minified the CSS with an online CSS minifier called [CSS Compressor](http://csscompressor.com/). I will not include the minified CSS in this audit, because it is waaaaay to long and you get the point.
 
 ###### The code
 ```html
@@ -54,7 +54,7 @@ First I changed the link to bootstrap.css to an external bootstrap.css on CDN. T
 
 ## JavaScript
 ### How it was
-Bootstrap didn't load external scripts but local scripts in the folder. Plus they didn't put a defer on the scripts.
+Just like the CSS, the scripts aren't loaded with a CDN. There is also possibility that the scripts interrupt content loading although they are placed at the bottom of the HTML file.
 
 ###### The code
 ```html
@@ -68,7 +68,7 @@ Bootstrap didn't load external scripts but local scripts in the folder. Plus the
 ![Before modifying the JS](https://github.com/ChanelZM/performance-matters/blob/feature/js/auditimg/aftercss.png)
 
 ### What I did
-First I changed all the local links of js to external links, then I put a defer on the script.
+I first changed the local links to JS into external JS from a CDN. I also placed a defer on the scripts and placed them in the head, so that it doesn't interrupt content loading.
 
 ###### The code
 ```html
@@ -83,5 +83,41 @@ crossorigin="anonymous" defer></script>
 ###### Loading time
 ![Before modifying the JS](https://github.com/ChanelZM/performance-matters/blob/feature/js/auditimg/afterjs.png)
 
-## HTML
-### How it was
+## Iteration 1
+After adding the above features I added a few more things: with Node.js I added a compressor to make the website even smaller, but I had to use the local JS files and couldn't load them from a CDN. And I added critical CSS using a Node.js module named Critical. The module made the critical css file for me which I then used inline to minimize blokking the DOM.
+
+###### The code
+HTML:
+```html
+<script src="../assets/js/vendor/loadcss.min.js"></script>
+<script defer>loadCSS('/assets/css/src/docs.min.css'); loadCSS('../dist/css/bootstrap.css');</script>
+<noscript>
+<link rel="stylesheet" href="/assets/css/src/docs.min.css">
+<link rel="stylesheet" href="../dist/css/bootstrap.css">
+</noscript>
+<style><!--inline style here--></style>
+```
+
+Javascript:
+```javscript
+const critical = require('critical');
+const compression = require('compression');
+
+app.use(compression({threshold: 0, filter: function(){return true;}}));//Credits to Merlijn Vos
+
+critical.generate({//Credits to both NPMJS and Elton Goncalves Gomes.
+inline: false,
+base: 'src/',
+src: 'index.html',
+css: ['src/dist/css/bootstrap.css', 'src/assets/css/src/docs.min.css'],
+width: 1300,
+height: 900,
+dest: 'dist/css/critical.css',
+minify: true,
+extract: true
+});
+```
+
+###### The final loading time
+![Final loading time audit](https://github.com/ChanelZM/performance-matters/blob/feature/js/auditimg/final.png)
+

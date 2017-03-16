@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     {% include './app-meta.html' %}
-    <link rel="stylesheet" href="../dist/css/critical.css">
-    <script src="../assets/js/vendor/loadcss.js"></script>
-    <script>loadCSS('/assets/css/src/docs.min.css'); loadCSS('../dist/css/bootstrap.css');</script>
+    <script src="../assets/js/vendor/loadcss.min.js"></script>
+    <script defer>loadCSS('/assets/css/src/docs.min.css'); loadCSS('../dist/css/bootstrap.css');</script>
+    <noscript>
+    <link rel="stylesheet" href="/assets/css/src/docs.min.css">
+    <link rel="stylesheet" href="../dist/css/bootstrap.css">
+    </noscript>
     
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
