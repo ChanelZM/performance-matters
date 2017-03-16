@@ -26,7 +26,7 @@ First I compressed the images using [Tiny JPG](https://tinyjpg.com/). Then I che
 ```
 
 ###### Loading time
-![before using picture and webp](https://github.com/ChanelZM/performance-matters/blob/feature/images/auditimg/afterpicture.png)
+![before using picture and webp](https://github.com/ChanelZM/performance-matters/blob/feature/criticalcss/auditimg/afterpicture.png)
 
 ## CSS
 ### How it was
