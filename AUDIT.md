@@ -99,7 +99,7 @@ HTML:
 ```
 
 Javascript:
-```javscript
+```javascript
 const critical = require('critical');
 const compression = require('compression');
 
@@ -120,4 +120,10 @@ extract: true
 
 ###### The final loading time
 ![Final loading time audit](https://github.com/ChanelZM/performance-matters/blob/feature/js/auditimg/final.png)
+
+###### Pagespeed Insights
+Desktop:
+![Desktop Pagespeed Insights 100/100](https://github.com/ChanelZM/performance-matters/blob/feature/js/auditimg/desktoppagespeed.png)
+Mobile:
+![Desktop Pagespeed Insights 99/100](https://github.com/ChanelZM/performance-matters/blob/feature/js/auditimg/mobilepagespeed.png)
 
